@@ -1,27 +1,27 @@
 import ExpenseItem from "./ExpenseItem";
 
-function ListExpenses(expenses) {
+function Expenses(props) {
 
     return (
         <div className="expenses">
-            <ExpenseItem>
-                date={expenses[0].date}
-                amount={expenses[0].Amount}
-                title={expenses[0].title}
-            </ExpenseItem>
-            <ExpenseItem>
-                date={expenses[1].date}
-                amount={expenses[1].Amount}
-                title={expenses[1].title}
-            </ExpenseItem>
-            <ExpenseItem>
-                date={expenses[2].date}
-                amount={expenses[2].Amount}
-                title={expenses[2].title}
-            </ExpenseItem>
+            <ExpenseItem
+                date={props.items[0].date}
+                amount={props.items[0].Amount}
+                title={props.items[0].title}
+            />
+            <ExpenseItem
+                date={props.items[1].date}
+                amount={props.items[1].Amount}
+                title={props.items[1].title}
+            />
+            <ExpenseItem
+                date={props.items[2].date}
+                amount={props.items[2].Amount}
+                title={props.items[2].title}
+            />
 
         </div>
     )
 }
 
-export default ListExpenses;
+export default Expenses;
