@@ -1,31 +1,34 @@
 import './App.css';
-
+import {useState} from "react";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
-    const expenses = [
+    const initialData = [
         {
             id: 'e1',
             title: 'insurance',
-            Amount: 291.8,
-            date: new Date(2000, 1, 5)
+            amount: 291.8,
+            date: new Date(2020, 1, 5)
         }, {
             id: 'e2',
             title: 'Car',
-            Amount: 20091.8,
-            date: new Date(2010, 5, 7)
+            amount: 20091.8,
+            date: new Date(2019, 5, 7)
         }, {
             id: 'e3',
             title: 'House',
-            Amount: 62095.90,
-            date: new Date(2014, 3, 12)
+            amount: 62095.90,
+            date: new Date(2021, 3, 12)
         }
     ]
+    const [expenses, setExpenses] = useState(initialData);
+    // add new element to previous Stateful elements
     const addExpenseHandler = expense => {
-
+        setExpenses(prevState => {
+            return [expense, ...prevState]
+        })
     };
-
     return (
         <div>
             <NewExpense onAddExpense={addExpenseHandler}/>

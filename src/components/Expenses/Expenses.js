@@ -5,31 +5,34 @@ import ExpensesFilter from "./ExpensesFilter";
 import {useState} from 'react'
 
 const Expenses = (props) => {
-    const [dateSelected, setDateSelected] = useState('');
-    const onselectDate = (dateSelected) => {
-        setDateSelected(dateSelected);
-        console.log(dateSelected);
+    const [filteredDate, setFilteredDate] = useState('2020');
+    const onselectDateHandler = (dateSelected) => {
+        setFilteredDate(dateSelected);
+    };
+
+    const filteredExpenses = props.items.filter(expense => {
+        return expense.date.getFullYear().toString() === filteredDate
+    });
+
+    let items = <p> No Expenses found for this Year </p>;
+
+    if (filteredExpenses.length > 0) {
+        items = filteredExpenses.map(expense => <ExpenseItem
+            key={expense.id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}/>
+        )
     }
 
     return (
         <div>
-            <ExpensesFilter onselect ={onselectDate}/>
             <Card className="expenses">
-                <ExpenseItem
-                    date={props.items[0].date}
-                    amount={props.items[0].Amount}
-                    title={props.items[0].title}
-                />
-                <ExpenseItem
-                    date={props.items[1].date}
-                    amount={props.items[1].Amount}
-                    title={props.items[1].title}
-                />
-                <ExpenseItem
-                    date={props.items[2].date}
-                    amount={props.items[2].Amount}
-                    title={props.items[2].title}
-                />
+                <ExpensesFilter selectedYear={filteredDate} onselect={onselectDateHandler}/>
+                {
+                    items
+                };
+
 
             </Card>
         </div>
